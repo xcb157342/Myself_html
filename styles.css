@@ -15,48 +15,31 @@ body {
 /* 固定侧边导航栏（shell）的样式 */
 .shell {
     position: fixed;
-    width: 5vw;
+    width: 0.9rem;
     /* 默认宽度 */
     height: 100%;
     background: #279daa;
     z-index: 9999;
     /* 确保导航栏在其他元素之上 */
-    transition: width 0.5s;
+    transition: width 0.7s;
     /* 宽度平滑过渡 */
-    padding-left: 1vw;
+    padding-left: 0.2rem;
     overflow: hidden;
     /* 隐藏超出内容 */
 }
 
 /* 当鼠标悬停时，扩展shell宽度 */
 .shell:hover {
-    width: 14vw;
-}
-
-section {
-    border-style: solid;
-    text-align: center;
-    width: 80vw;
-    height: 100vh;
-    margin-top: 0;
-    margin-left: 10vw;
-    border-radius: 1vh;
-    background-color: #d6eef0;
-    transition: box-shadow 0.3s;
-    /* 添加过渡效果 */
-}
-
-/* 鼠标进入，增加阴影 */
-section:hover {
-    box-shadow: 0vh 0vh 4vw #333;
+    width: 2.5rem;
+    transition: 0.6s;
 }
 
 /* 圆形图片容器的样式 */
 .imageBox {
     position: relative;
-    width: 2vw;
-    height: 2vw;
-    border-radius: 2vh;
+    width: 2rem;
+    height: 1.6rem;
+    border-radius: 50%;
     /* 使图片呈圆形 */
     overflow: hidden;
 
@@ -81,17 +64,20 @@ section:hover {
 /* shell中的每个列表项的样式 */
 .shell ul li {
     position: relative;
-    padding: 0.5vh;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+    padding-right: 0.1rem;
+    padding-left: 0.01rem;
 }
 
 /* 激活状态的列表项样式 */
 .active {
     background: #ffffff;
-    border-top-left-radius: 3vh;
-    border-bottom-left-radius: 3vh;
+    border-top-left-radius: 0.3rem;
+    border-bottom-left-radius: 0.3rem;
 }
 
-/* 为激活项添加装饰阴影效果（顶部） */
+/* /*为激活项添加装饰阴影效果（顶部）
 .active::before {
     content: "";
     position: absolute;
@@ -101,11 +87,11 @@ section:hover {
     height: 2.5vh;
     border-bottom-right-radius: 5vh;
     box-shadow: 1vh 1vh 0vh 1vh #fff;
-    /* border-style: solid; */
+    border-style: solid; 
     background: transparent;
 }
 
-/* 为激活项添加装饰阴影效果（底部） */
+为激活项添加装饰阴影效果（底部） 
 .active::after {
     content: "";
     position: absolute;
@@ -114,14 +100,15 @@ section:hover {
     width: 2vh;
     height: 2.5vh;
     border-top-right-radius: 5vh;
-    box-shadow: 1vh -1vh 0vh 0.6vh #fff;
-    /* border-style: solid; */
+    box-shadow: 1vh -1vh 0vh 1vh #fff;
+    border-style: solid; 
     background: transparent;
-}
+} 
+*/
 
 /* 设置logo的边距 */
 #logo {
-    margin: 5vh 0 6vh 0;
+    margin: 0.2rem 0 1rem 0;
 }
 
 /* 导航栏中列表项链接的样式 */
@@ -138,36 +125,44 @@ section:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 3vw;
-    padding-left: 0.2vw;
-    height: 6vh;
+    min-width: 0.6rem;
+    padding-left: 0.1rem;
+    height: 0.7rem;
     color: #333;
-    transition: 0.5s;
+    transition: 0.7s;
     color: rgb(255, 255, 255);
     /* 图标的白色 */
 }
 
 /* 设置图标的大小 */
 .icon i {
-    font-size: 2.5vh;
+    font-size: 0.4rem;
     z-index: 999;
-    width: 3vh;
-    margin-left: 0.2vw;
+    /* width: 0.4rem;
+    margin-left: 0.05rem; */
+}
+
+.shell:hover .navtext {
+    width: calc(2rem + 5rem);
+    /* 悬停时增加宽度 */
 }
 
 /* 图标旁边文本的样式 */
 .navtext {
     position: relative;
-    height: 4vh;
+    height: 0.4rem;
     display: flex;
     align-items: center;
-    font-size: 1.5vh;
+    font-size: 0.2rem;
+    text-align: center;
     color: #7028f6;
-    padding-left: 2vh;
-    padding-top: 2vh;
+    padding-left: 0.2rem;
+    padding-top: 0.2rem;
     text-transform: uppercase;
-    letter-spacing: 0.1vh;
+    letter-spacing: 0.01rem;
     transition: 0.5s;
+    width: 2rem;
+    /* 添加固定宽度 */
 }
 
 /* 当鼠标悬停时，改变图标和文本的颜色 */
@@ -182,9 +177,8 @@ section:hover {
 .active a .icon::before {
     content: "";
     position: absolute;
-
-    width: 3vw;
-    height: 3vw;
+    width: 0.6rem;
+    height: 0.6rem;
     background: #3f12e1;
     border-radius: 50%;
     transition: 0.5s;
@@ -211,8 +205,42 @@ section:hover {
     /* 默认显示在上层 */
 }
 
+section {
+    border-style: solid;
+    text-align: center;
+    width: 80vw;
+    height: 100vh;
+    margin-top: 0;
+    margin-left: 10vw;
+    border-radius: 1vh;
+    background-color: #d6eef0;
+    transition: box-shadow 0.3s;
+    /* 添加过渡效果 */
+}
+
+/* 鼠标进入，增加阴影 */
+section:hover {
+    box-shadow: 0vh 0vh 4vw #333;
+}
+
 /* 为内容区域添加位置，可以根据需要调整 */
 #homepage {
+    top: 0.2rem;
+    left: 1.5rem;
+    right: 0.5rem;
+    border-style: solid;
+    text-align: center;
+    height: auto;
+    border-radius: 0.2rem;
+    background-color: #d6eef0;
+    transition: box-shadow 0.6s;
+    /* 添加过渡效果 */
+}
+#homepage:hover {
+    box-shadow: 0vh 0vh 0.08rem #333;
+}
+
+#notepage {
     top: 150px;
     /* 调整 Y 轴位置 */
     left: 50%;
@@ -221,7 +249,43 @@ section:hover {
     /* 水平居中 */
 }
 
-#notepage {
+#calendarpage {
+    top: 150px;
+    /* 调整 Y 轴位置 */
+    left: 50%;
+    /* 居中显示 */
+    transform: translateX(-50%);
+    /* 水平居中 */
+}
+
+#appspage {
+    top: 150px;
+    /* 调整 Y 轴位置 */
+    left: 50%;
+    /* 居中显示 */
+    transform: translateX(-50%);
+    /* 水平居中 */
+}
+
+#linkspage {
+    top: 150px;
+    /* 调整 Y 轴位置 */
+    left: 50%;
+    /* 居中显示 */
+    transform: translateX(-50%);
+    /* 水平居中 */
+}
+
+#warningpage {
+    top: 150px;
+    /* 调整 Y 轴位置 */
+    left: 50%;
+    /* 居中显示 */
+    transform: translateX(-50%);
+    /* 水平居中 */
+}
+
+#morepage {
     top: 150px;
     /* 调整 Y 轴位置 */
     left: 50%;

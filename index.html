@@ -6,9 +6,7 @@
     <meta charset="UTF-8">
 
     <!-- 使页面在移动设备上正确缩放和渲染 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- 设置网页的标题 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" ) <!-- 设置网页的标题 -->
     <title>🦀の小窝</title>
 
     <!-- 引入外部字体图标库 -->
@@ -17,6 +15,7 @@
 </head>
 
 <body>
+
     <div class="content" id="homepage">
         <h2>内容 1</h2>
         <p>这是第一个内容的描述。</p>
@@ -24,6 +23,31 @@
 
     <div class="content" id="notepage">
         <h2>内容 2</h2>
+        <p>这是第二个内容的描述。</p>
+    </div>
+
+    <div class="content" id="calendarpage">
+        <h2>内容 3</h2>
+        <p>这是第二个内容的描述。</p>
+    </div>
+
+    <div class="content" id="appspage">
+        <h2>内容 4</h2>
+        <p>这是第二个内容的描述。</p>
+    </div>
+
+    <div class="content" id="linkspage">
+        <h2>内容 5</h2>
+        <p>这是第二个内容的描述。</p>
+    </div>
+
+    <div class="content" id="warningpage">
+        <h2>内容 6</h2>
+        <p>这是第二个内容的描述。</p>
+    </div>
+
+    <div class="content" id="morepage">
+        <h2>内容 7</h2>
         <p>这是第二个内容的描述。</p>
     </div>
 
@@ -36,10 +60,10 @@
                     <div class="icon">
                         <div class="imageBox">
                             <img class="" data-target="homepage" src="./font/ime.png" alt=""
-                                style="border-radius: 10vh; width: 3vh; height: 3vh;">
+                                style="border-radius: 5rem; width: 0.5rem; height: 0.5rem;">
                         </div>
                     </div>
-                    <div class="navtext">🦀の小窝</div>
+                    <div class="navtext" data-target="homepage">🦀の小窝</div>
                 </a>
             </li>
 
@@ -49,7 +73,8 @@
                     <div class="icon" data-target="homepage">
                         <i class="iconfont icon-home" "></i>
                     </div>
-                    <div class="navtext">Home</div>
+                    <div class=" navtext" data-target="homepage">Home
+                    </div>
                 </a>
             </li>
             <li>
@@ -57,66 +82,53 @@
                     <div class="icon" data-target="notepage">
                         <i class="iconfont icon-file"></i>
                     </div>
-                    <div class="navtext">Note</div>
+                    <div class="navtext" data-target="notepage">Note</div>
                 </a>
             </li>
             <li>
                 <a href="#calendar">
-                    <div class="icon">
+                    <div class="icon" data-target="calendarpage">
                         <i class="iconfont icon-calendar"></i>
                     </div>
-                    <div class="navtext">calendar</div>
+                    <div class="navtext" data-target="calendarpage">calendar</div>
                 </a>
             </li>
             <li>
                 <a href="#apps">
-                    <div class="icon">
+                    <div class="icon" data-target="appspage">
                         <i class="iconfont icon-apps"></i>
 
                     </div>
-                    <div class="navtext">apps</div>
+                    <div class="navtext" data-target="appspage">apps</div>
                 </a>
             </li>
             <li>
                 <a href="#links">
-                    <div class="icon">
+                    <div class="icon" data-target="linkspage">
                         <i class="iconfont icon-find"></i>
                     </div>
-                    <div class="navtext">links</div>
+                    <div class="navtext" data-target="linkspage">links</div>
                 </a>
             </li>
             <li>
                 <a href="#warning">
-                    <div class="icon">
+                    <div class="icon" data-target="warningpage">
                         <i class="iconfont icon-warning"></i>
                     </div>
-                    <div class="navtext">warning</div>
+                    <div class="navtext" data-target="warningpage">warning</div>
                 </a>
             </li>
             <li>
                 <a href="#more">
-                    <div class="icon">
+                    <div class="icon" data-target="morepage">
                         <i class="iconfont icon-more"></i>
                     </div>
-                    <div class="navtext">more</div>
+                    <div class="navtext" data-target="morepage">more</div>
                 </a>
             </li>
         </ul>
     </div>
 
-    <!-- 与每个导航项对应的内容部分 -->
-
-    <!-- <section id="home"></section>
-    <section id="note">
-        <div id="note.page">
-            <h1 style="text-align: center;">学习计划</h1>
-        </div>
-    </section> -->
-    <!-- <section id="calendar"></section>
-    <section id="apps"></section>
-    <section id="links"></section>
-    <section id="warning"></section>
-    <section id="more"></section> -->
 
 </body>
 
