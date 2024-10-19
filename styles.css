@@ -278,7 +278,7 @@ section:hover {
     color: rgb(0, 0, 0);
     /* 按钮文字颜色 */
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: medium;
+    font-size: 0.1rem;
     border: none;
     /* 去除边框 */
     border-radius: 0.1rem;
@@ -292,6 +292,110 @@ section:hover {
     /* 悬停时背景色变化 */
     box-shadow: 0vh 0vh 0.08rem #333;
 }
+
+.notecontent {
+    max-width: 10rem;
+    /* 最大宽度 */
+    margin: 20px auto;
+    /* 居中对齐 */
+    padding: 20px;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    background-color: #f9f9f9;
+    /* 背景色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+}
+
+/* 输入框样式 */
+.input-field {
+    width: calc(100% - 26px);
+    /* 使输入框宽度自适应 */
+    padding: 0.1rem;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 0.1rem;
+    ;
+    /* 圆角 */
+    margin-bottom: 10px;
+    /* 底部外边距 */
+    font-size: 0.1rem;
+    /* 字体大小 */
+}
+
+.input-field:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮样式 */
+.crebutton {
+    padding: 10px 15px;
+    /* 内边距 */
+    background-color: #4CAF50;
+    /* 背景色 */
+    color: white;
+    /* 文字颜色 */
+    border: none;
+    /* 去除边框 */
+    border-radius: 4px;
+    /* 圆角 */
+    cursor: pointer;
+    /* 鼠标悬停样式 */
+    font-size: 0.1rem;
+    /* 字体大小 */
+    margin-right: 5px;
+    /* 右侧外边距 */
+    transition: background-color 0.7s;
+    /* 背景色过渡效果 */
+}
+
+.crebutton:hover {
+    background-color: #45a049;
+    /* 悬停时背景色变化 */
+}
+
+/* 列表项样式 */
+.item {
+    display: flex;
+    /* 使用 Flexbox */
+    justify-content: space-between;
+    /* 两端对齐 */
+    align-items: center;
+    /* 垂直居中 */
+    padding: 10px;
+    /* 内边距 */
+    border-bottom: 1px solid #ccc;
+    /* 底部边框 */
+    font-size: 0.1rem;
+    /* 字体大小 */
+}
+
+/* 删除按钮样式 */
+.delete-button {
+    background-color: #f44336;
+    /* 删除按钮背景色 */
+    border-radius: 0.1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
+    font-size: 0.15rem;
+    padding: 0.05rem;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+    /* 悬停时删除按钮背景色变化 */
+}
+
+/* 隐藏输入框样式 */
+.hidden {
+    display: none;
+    /* 隐藏样式 */
+}
+
 
 #calendarpage {
     top: 150px;

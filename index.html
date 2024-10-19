@@ -22,7 +22,7 @@
     <div class="content" id="notepage">
         <div class="button-container">
             <tr>
-                <button class="notenavb">专业知识</button>
+                <button class="notenavb" onclick="expertise()">专业知识</button>
                 <button class="notenavb">论文文献</button>
                 <button class="notenavb">软件技能</button>
                 <button class="notenavb">英语水平</button>
@@ -30,7 +30,9 @@
             </tr>
         </div>
         <div class="notecontent" id="expertise">
-
+            <div id="item-list"></div>
+            <input type="text" id="input-text" class="input-field hidden" placeholder="请输入文本" />
+            <button id="create-button" class="crebutton" onclick="createItem()">创建</button>
         </div>
     </div>
 

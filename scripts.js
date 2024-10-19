@@ -67,5 +67,84 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+function createItem() {
+    const inputField = document.getElementById('input-text');
+    const createButton = document.getElementById('create-button');
+
+    // 显示输入框和保存、取消按钮
+    inputField.classList.remove('hidden'); // 显示输入框
+    inputField.value = ''; // 清空输入框
+    createButton.classList.add('hidden'); // 隐藏创建按钮
+
+    // 创建保存和取消按钮
+    const saveButton = document.createElement('button');
+    saveButton.className = 'crebutton';
+    saveButton.innerText = '保存';
+    saveButton.onclick = saveItem;
+
+    const cancelButton = document.createElement('button');
+    cancelButton.className = 'crebutton';
+    cancelButton.innerText = '取消';
+    cancelButton.onclick = cancelCreate;
+
+    // 添加按钮到容器
+    const container = document.querySelector('.notecontent');
+    container.appendChild(saveButton);
+    container.appendChild(cancelButton);
+}
+
+// 保存项目
+function saveItem() {
+    const inputField = document.getElementById('input-text');
+    const itemList = document.getElementById('item-list');
+    const createButton = document.getElementById('create-button');
+
+    // 获取输入文本并创建新项
+    const newItemText = inputField.value.trim();
+    if (newItemText) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        itemDiv.innerText = newItemText;
+
+        // 创建删除按钮
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'button delete-button';
+        deleteButton.innerText = '删除';
+        deleteButton.onclick = function () {
+            itemDiv.remove(); // 删除对应文本与按钮
+        };
+
+        itemDiv.appendChild(deleteButton);
+        itemList.appendChild(itemDiv);
+    }
+
+    // 隐藏输入框和保存、取消按钮，显示创建按钮
+    inputField.classList.add('hidden'); // 隐藏输入框
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        if (button.innerText === '保存' || button.innerText === '取消') {
+            button.remove(); // 移除保存和取消按钮
+        }
+    });
+    createButton.classList.remove('hidden'); // 显示创建按钮
+}
+
+// 取消创建
+function cancelCreate() {
+    const inputField = document.getElementById('input-text');
+    const createButton = document.getElementById('create-button');
+
+    // 隐藏输入框和保存、取消按钮，显示创建按钮
+    inputField.classList.add('hidden'); // 隐藏输入框
+    inputField.value = ''; // 清空输入框
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+        if (button.innerText === '保存' || button.innerText === '取消') {
+            button.remove(); // 移除保存和取消按钮
+        }
+    });
+    createButton.classList.remove('hidden'); // 显示创建按钮
+}
+
 
 
