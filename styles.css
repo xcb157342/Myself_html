@@ -290,9 +290,6 @@ section:hover {
 .notenavb:hover {
     background-color: #94b5f7;
     /* 悬停时背景色变化 */
-}
-
-#notepage:hover {
     box-shadow: 0vh 0vh 0.08rem #333;
 }
 
