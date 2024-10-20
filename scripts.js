@@ -19,6 +19,7 @@ function updateTime() {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }; // 时间格式选项
     const formattedTime = now.toLocaleString('zh-CN', options); // 格式化时间为中文
     document.getElementById('current-time').textContent = formattedTime; // 更新页面上的时间
+    return formattedTime
 }
 
 // 每秒更新一次时间
@@ -234,7 +235,7 @@ function cancelCreate() {
 async function loadItems() {
     const { data, error } = await supabase
         .from('items')
-        .select('text');
+        .select('text,time');
 
     if (error) {
         console.error('Error:', error);
@@ -247,14 +248,10 @@ async function loadItems() {
 function displayItems(data) {
     const itemList = document.getElementById('item-list');
     itemList.innerHTML = ''; // 清空当前显示
-    // let { data: items} = await supabase
-    //     .from('items')
-    //     .select('text')
-
     data.forEach((item) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'item';
-        itemDiv.innerHTML = `<span>${item.text}</span>`
+        itemDiv.innerHTML = `<span>${item.text}</span> <span>创建时间：${item.time}<\span>`
         itemList.appendChild(itemDiv);
         itemList.appendChild(itemDiv);
     });
