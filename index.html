@@ -4,9 +4,8 @@
 <head>
     <!-- 声明使用UTF-8字符编码 -->
     <meta charset="UTF-8">
-
     <!-- 使页面在移动设备上正确缩放和渲染 -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" ) <!-- 设置网页的标题 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" )>
     <title>🦀の小窝</title>
 
     <!-- 引入外部字体图标库 -->
@@ -15,7 +14,7 @@
 </head>
 
 <body>
-
+    <div class="current-time" id="current-time">加载中...</div>
     <div class="content" id="homepage">
     </div>
 
@@ -26,13 +25,14 @@
                 <button class="notenavb">论文文献</button>
                 <button class="notenavb">软件技能</button>
                 <button class="notenavb">英语水平</button>
-                <button class="notenavb">游戏展示</button>
+                <button class="notenavb">留言</button>
             </tr>
         </div>
-        <div class="notecontent" id="expertise">
+        <div class="Comment" id="Comment" data-target="Comment">
+            <div style="font-size: 0.5rem;">留言</div>
             <div id="item-list"></div>
             <input type="text" id="input-text" class="input-field hidden" placeholder="请输入文本" />
-            <button id="create-button" class="crebutton" onclick="createItem()">创建</button>
+            <button id="create-button" class="crebutton">创建</button>
         </div>
     </div>
 
@@ -139,10 +139,10 @@
             </li>
         </ul>
     </div>
-
+    <script type="module" src="scripts.js"></script>
 
 </body>
 
-<script src="scripts.js"></script>
+
 
 </html>
