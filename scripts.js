@@ -235,7 +235,7 @@ function cancelCreate() {
 async function loadItems() {
     const { data, error } = await supabase
         .from('items')
-        .select('text,time');
+        .select('text,created_at');
 
     if (error) {
         console.error('Error:', error);
@@ -251,7 +251,7 @@ function displayItems(data) {
     data.forEach((item) => {
         const itemDiv = document.createElement('div');
         itemDiv.className = 'item';
-        itemDiv.innerHTML = `<span>${item.text}</span> <span>创建时间：${item.time}<\span>`
+        itemDiv.innerHTML = `<span>${item.text}</span> <span>创建时间：${item.created_at}<\span>`
         itemList.appendChild(itemDiv);
         itemList.appendChild(itemDiv);
     });
