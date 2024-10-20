@@ -243,7 +243,8 @@ async function loadItems() {
         const formattedData = data.map(item => {
             return {
                 text: item.text,
-                created_at: item.created_at.substring(0, item.created_at.length - 3) // 删除最后三个字符
+                created_at: item.created_at.substring(0, item.created_at.length - 3)
+                    .replace('T', ' ') // 将 T 替换为空格// 删除最后三个字符
             };
         });
         displayItems(formattedData); // 传递格式化后的数据
