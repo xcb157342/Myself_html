@@ -240,7 +240,13 @@ async function loadItems() {
     if (error) {
         console.error('Error:', error);
     } else {
-        displayItems(data);
+        const formattedData = data.map(item => {
+            return {
+                text: item.text,
+                created_at: item.created_at.substring(0, item.created_at.length - 3) // 删除最后三个字符
+            };
+        });
+        displayItems(formattedData); // 传递格式化后的数据
     }
 }
 
