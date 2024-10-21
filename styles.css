@@ -310,7 +310,7 @@ section:hover {
     box-shadow: 0vh 0vh 0.08rem #333;
 }
 
-.Comment {
+#expertise {
     max-width: 80%;
     /* 最大宽度 */
     margin: 20px auto;
@@ -326,6 +326,87 @@ section:hover {
     backdrop-filter: blur(0.9rem);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* 阴影 */
+    z-index: 5;
+    display: none;
+}
+
+#literature {
+    max-width: 80%;
+    /* 最大宽度 */
+    margin: 20px auto;
+    /* 居中对齐 */
+    padding: 20px;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    background-color: rbga(0, 0, 0, 0);
+    /* 背景色 */
+    backdrop-filter: blur(0.9rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+    z-index: 4;
+    display: none;
+}
+
+#software {
+    max-width: 80%;
+    /* 最大宽度 */
+    margin: 20px auto;
+    /* 居中对齐 */
+    padding: 20px;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    background-color: rbga(0, 0, 0, 0);
+    /* 背景色 */
+    backdrop-filter: blur(0.9rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+    z-index: 3;
+    display: none;
+}
+
+#english {
+    max-width: 80%;
+    /* 最大宽度 */
+    margin: 20px auto;
+    /* 居中对齐 */
+    padding: 20px;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    background-color: rbga(0, 0, 0, 0);
+    /* 背景色 */
+    backdrop-filter: blur(0.9rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+    z-index: 2;
+    display: none;
+}
+
+#comment {
+    max-width: 80%;
+    /* 最大宽度 */
+    margin: 20px auto;
+    /* 居中对齐 */
+    padding: 20px;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    background-color: rbga(0, 0, 0, 0);
+    /* 背景色 */
+    backdrop-filter: blur(0.9rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+    z-index: 1;
 }
 
 /* 输入框样式 */
@@ -432,6 +513,7 @@ section:hover {
     /* 悬停时删除按钮背景色变化 */
     cursor: pointer;
 }
+
 
 #calendarpage {
     top: 150px;

@@ -20,21 +20,38 @@
 
     <div class="content" id="notepage">
         <div class="button-container">
-            <tr>
-                <button class="notenavb" onclick="expertise()">专业知识</button>
-                <button class="notenavb">论文文献</button>
-                <button class="notenavb">软件技能</button>
-                <button class="notenavb">英语水平</button>
-                <button class="notenavb">留言</button>
-            </tr>
+            <button class="notenavb" data-target="expertise" onclick="notenavclick.call(this)">专业知识</button>
+            <button class="notenavb" data-target="literature" onclick="notenavclick.call(this)">论文文献</button>
+            <button class="notenavb" data-target="software" onclick="notenavclick.call(this)">软件技能</button>
+            <button class="notenavb" data-target="english" onclick="notenavclick.call(this)">英语水平</button>
+            <button class="notenavb" data-target="comment" onclick="notenavclick.call(this)">留言</button>
         </div>
-        <div class="Comment" id="Comment" data-target="Comment">
+        <div class="note_window" id="expertise">
+            <span>专业知识</span>
+        </div>
+        <div class="note_window" id="literature">
+            <h2>论文文献</h2>
+            <p>这里是论文文献的内容。</p>
+        </div>
+
+        <div class="note_window" id="software">
+            <h2>软件技能</h2>
+            <p>这里是关于软件技能的内容。</p>
+        </div>
+
+        <div class="note_window" id="english">
+            <h2>英语水平</h2>
+            <p>这里是英语水平的内容。</p>
+        </div>
+        <div class="note_window" id="comment">
             <div style="font-size: 0.5rem;">留言</div>
             <div id="item-list"></div>
             <input type="text" id="input-text" class="input-field hidden" placeholder="请输入文本" />
             <button id="create-button" class="crebutton">创建</button>
         </div>
     </div>
+    </div>
+
 
 
     <div class="content" id="calendarpage">
@@ -43,7 +60,7 @@
     </div>
 
     <div class="content" id="appspage">
-        <h2>内容 4</h2>
+        <h2>日历、抽奖、天气</h2>
         <p>这是第二个内容的描述。</p>
     </div>
 
@@ -139,7 +156,7 @@
             </li>
         </ul>
     </div>
-    <script type="module" src="scripts.js?v=1.0.1" ></script>
+    <script type="module" src="scripts.js?v=1.0.1"></script>
 
 </body>
 

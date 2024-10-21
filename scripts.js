@@ -272,20 +272,21 @@ window.createItem = createItem;
 // 为创建按钮绑定点击事件
 document.getElementById('create-button').addEventListener('click', createItem);
 
+// document.getElementById('expertise').style.display = 'block';
 //note页面横向导航点击事件
 function notenavclick() {
     // 获取目标内容的ID
     var targetId = this.getAttribute('data-target');
-
-    // 隐藏所有
+    // 隐藏所有内容窗口
     var note_windows = document.querySelectorAll('.note_window');
     note_windows.forEach(function (note_window) {
         note_window.style.display = 'none';
     });
-
     // 显示当前点击的内容
-    var targetwindow = document.getElementById(targetId);
-    if (targetwindow) {
-        targetwindow.style.display = 'block';
+    var window = document.getElementById(targetId);
+    if (window) {
+        window.style.display = 'block';
     }
 }
+
+window.notenavclick = notenavclick;
