@@ -44,7 +44,7 @@ function activeLink() {
 
 /* 为每个列表项添加点击事件 */
 nav.forEach((item) => item.addEventListener("click", activeLink));
-
+//导航图标点击
 document.addEventListener('DOMContentLoaded', function () {
     // 获取所有可点击的图片
     var clickableImages = document.querySelectorAll('.icon');
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
+//导航文本点击
 document.addEventListener('DOMContentLoaded', function () {
     // 获取所有可点击的文字
     var clickableTexts = document.querySelectorAll('.navtext');
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
+//创建项目
 function createItem() {
     const inputField = document.getElementById('input-text');
     const createButton = document.getElementById('create-button');
@@ -119,7 +119,7 @@ function createItem() {
     container.appendChild(cancelButton);
 }
 
-
+//删除项目
 async function deleteItem(id) {
     itemDiv.remove(); // 删除对应文本与按钮
     const { error } = await supabase
@@ -279,7 +279,6 @@ window.createItem = createItem;
 // 为创建按钮绑定点击事件
 document.getElementById('create-button').addEventListener('click', createItem);
 
-// document.getElementById('expertise').style.display = 'block';
 //note页面横向导航点击事件
 function notenavclick() {
     // 获取目标内容的ID
@@ -302,7 +301,7 @@ function notenavclick() {
 }
 
 window.notenavclick = notenavclick;
-
+//top
 window.onscroll = function () {
     toggleScrollToTopButton();
 };
@@ -319,9 +318,9 @@ function toggleScrollToTopButton() {
 document.getElementById('scrollToTopBtn').onclick = function () {
     scrollToTop();
 };
-
+// 使用平滑滚动回到顶部
 function scrollToTop() {
-    // 使用平滑滚动回到顶部
+
     window.scrollTo({
         top: 0,
         behavior: 'smooth' // 平滑滚动效果
