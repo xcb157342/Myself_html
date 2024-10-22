@@ -277,13 +277,20 @@ section:hover {
     /* 使用 Flexbox */
     justify-content: space-around;
     /* 均匀分布按钮 */
-    align-items: flex-start;
+    align-items: center;
     /* 顶端对齐 */
-    height: auto;
+    height: 0.6rem;
     /* 设置容器高度 */
     border: 1px solid #ccc;
     /* 容器边框 */
     border-radius: 0.1rem;
+    position: sticky;
+    top: 0.2rem;
+    z-index: 6;
+    background: #e3ecedbf;
+    backdrop-filter: blur(1rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
 }
 
 /* 按钮样式 */
@@ -311,86 +318,29 @@ section:hover {
 }
 
 #expertise {
-    max-width: 80%;
-    /* 最大宽度 */
-    margin: 20px auto;
-    /* 居中对齐 */
-    padding: 20px;
-    /* 内边距 */
-    border: 1px solid #ccc;
-    /* 边框 */
-    border-radius: 8px;
-    /* 圆角 */
-    background-color: rbga(0, 0, 0, 0);
-    /* 背景色 */
-    backdrop-filter: blur(0.9rem);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 阴影 */
     z-index: 5;
     display: none;
 }
 
 #literature {
-    max-width: 80%;
-    /* 最大宽度 */
-    margin: 20px auto;
-    /* 居中对齐 */
-    padding: 20px;
-    /* 内边距 */
-    border: 1px solid #ccc;
-    /* 边框 */
-    border-radius: 8px;
-    /* 圆角 */
-    background-color: rbga(0, 0, 0, 0);
-    /* 背景色 */
-    backdrop-filter: blur(0.9rem);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 阴影 */
-    z-index: 4;
     display: none;
 }
 
 #software {
-    max-width: 80%;
-    /* 最大宽度 */
-    margin: 20px auto;
-    /* 居中对齐 */
-    padding: 20px;
-    /* 内边距 */
-    border: 1px solid #ccc;
-    /* 边框 */
-    border-radius: 8px;
-    /* 圆角 */
-    background-color: rbga(0, 0, 0, 0);
-    /* 背景色 */
-    backdrop-filter: blur(0.9rem);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 阴影 */
-    z-index: 3;
     display: none;
 }
 
 #english {
-    max-width: 80%;
-    /* 最大宽度 */
-    margin: 20px auto;
-    /* 居中对齐 */
-    padding: 20px;
-    /* 内边距 */
-    border: 1px solid #ccc;
-    /* 边框 */
-    border-radius: 8px;
-    /* 圆角 */
-    background-color: rbga(0, 0, 0, 0);
-    /* 背景色 */
-    backdrop-filter: blur(0.9rem);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* 阴影 */
     z-index: 2;
     display: none;
 }
 
 #comment {
+    z-index: 1;
+}
+
+.note_window {
+    background: #e3eced89;
     max-width: 80%;
     /* 最大宽度 */
     margin: 20px auto;
@@ -401,12 +351,10 @@ section:hover {
     /* 边框 */
     border-radius: 8px;
     /* 圆角 */
-    background-color: rbga(0, 0, 0, 0);
     /* 背景色 */
     backdrop-filter: blur(0.9rem);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     /* 阴影 */
-    z-index: 1;
 }
 
 /* 输入框样式 */
@@ -423,6 +371,8 @@ section:hover {
     /* 底部外边距 */
     font-size: 0.2rem;
     /* 字体大小 */
+    position: sticky;
+    bottom: 0.8rem;
 }
 
 .input-field:hover {
@@ -450,6 +400,8 @@ section:hover {
     transition: background-color 0.2s;
     transition: box-shadow 0.2s;
     /* 背景色过渡效果 */
+    position: sticky;
+    bottom: 0.3rem;
 }
 
 .crebutton:hover {

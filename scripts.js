@@ -107,7 +107,7 @@ function createItem() {
     cancelButton.onclick = cancelCreate;
 
     // 添加按钮到容器
-    const container = document.querySelector('.Comment');
+    const container = document.querySelector('#comment');
     container.appendChild(saveButton);
     container.appendChild(cancelButton);
 }
@@ -287,6 +287,11 @@ function notenavclick() {
     if (window) {
         window.style.display = 'block';
     }
+    var buttons = document.querySelectorAll('.notenavb');
+    buttons.forEach(function (button) {
+        button.style.background = 'rgba(0,0,0,0)';
+    })
+    this.style.background = '#94b5f7';
 }
 
 window.notenavclick = notenavclick;
