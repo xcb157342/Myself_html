@@ -1,0 +1,209 @@
+#notepage {
+    top: 0.2rem;
+    left: 1.5rem;
+    right: 0.5rem;
+    border-style: solid;
+    text-align: center;
+    height: auto;
+    border-radius: 0.2rem;
+    background-color: #d6eef0;
+    transition: box-shadow 0.6s;
+    /* 添加过渡效果 */
+    display: none;
+    background-image: url('./font/shu.jpg');
+}
+
+/* 主容器样式 */
+.button-container {
+    display: flex;
+    /* 使用 Flexbox */
+    justify-content: space-around;
+    /* 均匀分布按钮 */
+    align-items: center;
+    /* 顶端对齐 */
+    height: 0.6rem;
+    /* 设置容器高度 */
+    border: 1px solid #ccc;
+    /* 容器边框 */
+    border-radius: 0.1rem;
+    position: sticky;
+    top: 0.2rem;
+    z-index: 6;
+    background: #e3ecedbf;
+    backdrop-filter: blur(1rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+}
+
+/* 按钮样式 */
+.notenavb {
+    padding: 10px 15px;
+    /* 按钮内边距 */
+    background-color: rgba(0, 0, 0, 0);
+    /* 按钮背景色 */
+    color: rgb(0, 0, 0);
+    /* 按钮文字颜色 */
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 0.2rem;
+    border: none;
+    /* 去除边框 */
+    border-radius: 0.1rem;
+    /* 圆角 */
+    cursor: pointer;
+    /* 鼠标悬停样式 */
+}
+
+.notenavb:hover {
+    background-color: #94b5f7;
+    /* 悬停时背景色变化 */
+    box-shadow: 0vh 0vh 0.08rem #333;
+}
+
+#expertise {
+    z-index: 5;
+    display: none;
+}
+
+#literature {
+    display: none;
+}
+
+#software {
+    display: none;
+}
+
+#english {
+    z-index: 2;
+    display: none;
+}
+
+#comment {
+    z-index: 1;
+}
+
+.note_window {
+    background: #e3eced89;
+    max-width: 80%;
+    /* 最大宽度 */
+    margin: 20px auto;
+    /* 居中对齐 */
+    padding: 20px;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 8px;
+    /* 圆角 */
+    /* 背景色 */
+    backdrop-filter: blur(0.9rem);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* 阴影 */
+}
+
+/* 输入框样式 */
+.input-field {
+    width: calc(100% - 26px);
+    /* 使输入框宽度自适应 */
+    padding: 0.1rem;
+    /* 内边距 */
+    border: 1px solid #ccc;
+    /* 边框 */
+    border-radius: 0.1rem;
+    /* 圆角 */
+    margin-bottom: 10px;
+    /* 底部外边距 */
+    font-size: 0.2rem;
+    /* 字体大小 */
+    position: sticky;
+    bottom: 0.8rem;
+}
+
+.input-field:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮样式 */
+.crebutton {
+    padding: 10px 15px;
+    /* 内边距 */
+    background-color: #4CAF50;
+    /* 背景色 */
+    color: white;
+    /* 文字颜色 */
+    border: none;
+    /* 去除边框 */
+    border-radius: 4px;
+    /* 圆角 */
+    cursor: pointer;
+    /* 鼠标悬停样式 */
+    font-size: 0.2rem;
+    /* 字体大小 */
+    margin-right: 5px;
+    /* 右侧外边距 */
+    transition: background-color 0.2s;
+    transition: box-shadow 0.2s;
+    /* 背景色过渡效果 */
+    position: sticky;
+    bottom: 0.3rem;
+}
+
+.crebutton:hover {
+    background-color: #45a049;
+    /* 悬停时背景色变化 */
+    box-shadow: 0 0 0.1rem #333;
+}
+
+/* 列表项样式 */
+.item {
+    display: flex;
+    /* 使用 Flexbox */
+    justify-content: space-between;
+    /* 两端对齐 */
+    align-items: center;
+    /* 垂直居中 */
+    padding: 10px;
+    /* 内边距 */
+    border-bottom: 1px solid #ccc;
+    /* 底部边框 */
+    font-size: 0.2rem;
+    /* 字体大小 */
+    text-shadow: 1px 1px 2px#ffffff;
+}
+
+/* 删除按钮样式 */
+.delete-button {
+    background-color: #f44336;
+    /* 删除按钮背景色 */
+    border-radius: 0.1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
+    font-size: 0.15rem;
+    padding: 0.05rem;
+}
+
+.delete-button:hover {
+    background-color: #d32f2f;
+    /* 悬停时删除按钮背景色变化 */
+    cursor: pointer;
+}
+
+/* 隐藏输入框样式 */
+.hidden {
+    display: none;
+    /* 隐藏样式 */
+}
+
+.button-edit-button {
+    background-color: #4CAF50;
+    /* 删除按钮背景色 */
+    border-radius: 0.1rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: #fff;
+    font-size: 0.15rem;
+    padding: 0.05rem;
+}
+
+.button-edit-button:hover {
+    background-color: #d32f2f;
+    /* 悬停时删除按钮背景色变化 */
+    cursor: pointer;
+}

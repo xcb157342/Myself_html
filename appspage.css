@@ -1,0 +1,40 @@
+#appspage {
+    top: 1.2rem;
+    left: 3.5rem;
+    right: 2.5rem;
+    width: auto;
+    height: auto;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    /* 允许换行 */
+    justify-content: space-between;
+    /* 均匀分布 */
+    padding: 10px;
+    /* 添加内边距 */
+    background: white;
+    /* 添加背景色以更好地查看 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* 添加阴影 */
+}
+
+.app {
+    flex: 1 1 45%;
+    /* 每个小块占45%的宽度，自动调整高度 */
+    height: 200px;
+    /* 设置小块的固定高度 */
+    background-color: #007BFF;
+    /* 背景色 */
+    color: white;
+    /* 字体颜色 */
+    display: flex;
+    /* 使文本居中 */
+    justify-content: center;
+    /* 水平居中 */
+    align-items: center;
+    /* 垂直居中 */
+    border-radius: 5px;
+    /* 圆角 */
+    margin: 10px;
+    /* 小块之间的间距 */
+}

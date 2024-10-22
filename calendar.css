@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-size: 0.3rem;
+}
+
+.calendar-container {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 8rem;
+    position: relative;
+    height: 6rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #007BFF;
+    color: rgb(255, 255, 255);
+}
+
+.calendar {
+    padding: 10px;
+}
+
+.weekdays {
+    display: flex;
+    background: #f0f0f0;
+    padding: 10px 0;
+}
+
+.weekdays div {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+}
+
+.days {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.days div {
+    width: calc(100% / 7);
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #f0f0f0;
+    box-sizing: border-box;
+}
+
+.days div:hover {
+    background: #007BFF;
+    color: white;
+}
+
+#prev-month,
+#next-month {
+    border-radius: 0.3vw;
+    background-color: #ffffff;
+    cursor: pointer;
+    font-size: 0.2rem;
+}
+
+.today {
+    background-color: #ffcc00;
+    /* 标记今天的颜色 */
+    border: 2px solid #ff9900;
+    /* 边框颜色 */
+}
+
+.jump-to-today {
+    position: absolute;
+    /* 绝对定位 */
+    bottom: 10px;
+    /* 距离底部10像素 */
+    right: 10px;
+    /* 距离右边10像素 */
+    background-color: #007BFF;
+    /* 背景颜色 */
+    color: white;
+    /* 字体颜色 */
+    border: none;
+    /* 无边框 */
+    padding: 10px 15px;
+    /* 内边距 */
+    border-radius: 5px;
+    /* 圆角 */
+    cursor: pointer;
+    /* 鼠标悬停时为手指形状 */
+    z-index: 1;
+    /* 确保按钮在其他元素上方 */
+    font-size: 0.2rem;
+}
+
+
+.jump-to-today:hover {
+    background-color: #0056b3;
+    /* 悬停时按钮颜色变化 */
+}

@@ -7,7 +7,14 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 //根据设备宽度设定font-size
 function refontsize() {
-    document.documentElement.style.fontSize = screen.width / 20 + 'px';
+    let fz = 0;
+    if (screen.width > screen.height) {
+        fz = screen.width
+    }
+    else {
+        fz = screen.height
+    }
+    document.documentElement.style.fontSize = fz / 20 + 'px';
 }
 
 refontsize();
@@ -295,3 +302,28 @@ function notenavclick() {
 }
 
 window.notenavclick = notenavclick;
+
+window.onscroll = function () {
+    toggleScrollToTopButton();
+};
+function toggleScrollToTopButton() {
+    const button = document.getElementById('scrollToTopBtn');
+    // 当滚动到一定距离时显示按钮，这里设置为 200 像素
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        button.style.display = "block"; // 显示按钮
+    } else {
+        button.style.display = "none"; // 隐藏按钮
+    }
+}
+
+document.getElementById('scrollToTopBtn').onclick = function () {
+    scrollToTop();
+};
+
+function scrollToTop() {
+    // 使用平滑滚动回到顶部
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // 平滑滚动效果
+    });
+}
