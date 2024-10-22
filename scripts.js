@@ -326,3 +326,107 @@ function scrollToTop() {
         behavior: 'smooth' // 平滑滚动效果
     });
 }
+
+function appsclick() {
+
+}
+
+// OpenWeatherMap API key 
+window.onload = function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            fetchWeather(lat, lon);
+        }, function () {
+            showError("无法获取位置。");
+        });
+    } else {
+        showError("浏览器不支持地理位置服务。");
+    }
+};
+
+function fetchWeather(lat, lon) {
+    const apiKey = '6699cc597cf7da347ed2c28ddfd0c177'; 
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=zh&units=metric`;
+
+    fetch(apiUrl)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("天气信息获取失败。");
+            }
+            return response.json();
+        })
+        .then(data => {
+            const weatherInfo = `
+                        <div class = "weatherinfo"><i class="fas fa-location icon"></i>地点:${data.name}- 中国</div>
+                        <div class = "weatherinfo"><i class="fas fa-thermometer-half icon"></i> 温度: ${data.main.temp} °C</div>
+                        <div class = "weatherinfo"><i class="fas fa-cloud icon"></i> 天气: ${data.weather[0].description}</div>
+                        <div class = "weatherinfo"><i class="fas fa-wind icon"></i> 风速: ${data.wind.speed} m/s</div>
+                        <div class = "weatherinfo"><i class="fas fa-arrow-alt-circle-up icon"></i> 风向: ${data.wind.deg}°</div>
+                        <div class = "weatherinfo"><i class="fas fa-tint icon"></i> 湿度: ${data.main.humidity}%</div>
+                        <div class = "weatherinfo"><i class="fas fa-sun icon"></i> 日出: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString()}</div>
+                        <div class = "weatherinfo"><i class="fas fa-moon icon"></i> 日落: ${new Date(data.sys.sunset * 1000).toLocaleTimeString()}</div>
+                        <div class = "weatherinfo"><i class="fas fa-tachometer-alt icon"></i> 气压: ${data.main.pressure} hPa</div>
+                    `;
+
+            const suggestions = getSuggestions(data.main.temp, data.main.humidity);
+            document.getElementById('weather-info').innerHTML = weatherInfo;
+            document.getElementById('suggestions').innerHTML = suggestions;
+            document.getElementById('error-message').textContent = '';
+        })
+        .catch(error => {
+            showError(error.message);
+        });
+}
+
+function getSuggestions(temp, humidity) {
+    let clothing = "建议穿轻薄的衣物。";
+    let sunscreen = "建议使用防晒霜。";
+    let travel = "适合出行，享受户外活动。";
+
+    if (temp < 10) {
+        clothing = "建议穿保暖衣物。";
+    } else if (temp >= 10 && temp < 20) {
+        clothing = "建议穿外套。";
+    } else if (temp >= 20 && temp < 30) {
+        clothing = "建议穿短袖衣物。";
+    } else {
+        clothing = "建议穿凉快的衣物。";
+    }
+
+    if (humidity > 80) {
+        travel = "可能会有降雨，请携带雨具。";
+    }
+
+    return `
+                <h2>建议</h2>
+                <p>${clothing}</p>
+                <p>${sunscreen}</p>
+                <p>${travel}</p>
+            `;
+}
+
+function showError(message) {
+    document.getElementById('error-message').textContent = message;
+    document.getElementById('weather-info').innerHTML = '';
+    document.getElementById('suggestions').innerHTML = '';
+}
+
+const trigger = document.getElementById('app1');
+const popup = document.getElementById('weatherpage');
+const close = document.getElementById('close');
+
+// 点击触发器放大并显示弹出窗口
+trigger.addEventListener('click', () => {
+    trigger.classList.add('scale-up'); // 添加放大动画
+    setTimeout(() => {
+        popup.classList.add('show'); // 延迟显示弹出窗口
+    }, 500); // 延迟时间与动画时间一致
+});
+
+// 点击关闭按钮隐藏弹出窗口
+close.addEventListener('click', () => {
+    popup.classList.remove('show');
+    trigger.classList.remove('scale-up'); // 移除放大效果
+});

@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="shell.css">
     <link rel="stylesheet" href="calendarpage.css">
     <link rel="stylesheet" href="appspage.css">
+    <link rel="stylesheet" href="weather.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -63,16 +65,23 @@
     </div>
 
     <div class="content" id="calendarpage">
-        <iframe src="calendar.html" id="calendar-frame" width="100%" height="800px"></iframe>
+        <iframe src="calendar.html" id="calendar-frame" width="100%" height="800rem"></iframe>
     </div>
 
     <div class="content" id="appspage">
-        <div class="app-container" id="app-container">
-            <div class="app" id="app1">app1</div>
-            <div class="app" id="app2">app2</div>
-            <div class="app" id="app3">app3</div>
-            <div class="app" id="app4">app4</div>
+        <div class="appi" id="app1">天气</div>
+        <div class="appi" id="app2">app2</div>
+        <div class="appi" id="app3">app3</div>
+        <div class="appi" id="app4">app4</div>
+    </div>
+    <div class="weatherpage" id="weatherpage">
+        <h1><b>天气查询</b></h1>
+        <div class="weather-container">
+            <div class="weather-info" id="weather-info"></div>
         </div>
+        <div class="suggestions" id="suggestions"></div>
+        <div class="error" id="error-message"></div>
+        <span class="close" id="close">X</span>
     </div>
 
     <div class="content" id="linkspage">
