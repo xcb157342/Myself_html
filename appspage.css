@@ -1,7 +1,7 @@
 #appspage {
     top: 1.2rem;
-    left: 4.5rem;
-    right: 3.5rem;
+    left: 3rem;
+    right: 2rem;
     bottom: 1.2rem;
     border-radius: 0.3rem;
     display: inline-flex;
@@ -31,7 +31,7 @@
     /* 垂直居中 */
     border-radius: 0.2rem;
     /* 圆角 */
-    margin-right: 0.1rem;
+    margin-right: 0.5rem;
     /* 元素间距 */
     box-shadow: 0 0.2rem 0.2rem rgba(0, 0, 0, 0.318);
     cursor: pointer;
