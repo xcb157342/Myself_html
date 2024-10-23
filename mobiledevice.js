@@ -22,6 +22,7 @@ if (isMobileDevice()) {
     // 如果是电脑端，添加鼠标事件
     touchArea.addEventListener('mousedown', function (event) {
         console.log('Mouse Down:', event);
+        
     });
 
     touchArea.addEventListener('mousemove', function (event) {
