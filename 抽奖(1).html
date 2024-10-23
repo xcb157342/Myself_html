@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日历打卡与抽奖</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f39c12, #e74c3c);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .month,
+        .days {
+            margin-bottom: 20px;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .day {
+            padding: 10px;
+            text-align: center;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .day.header {
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+        }
+
+        .circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            border: 2px solid red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .bottom-nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .lottery-records {
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+        }
+
+        #clearRecords {
+            background-color: #ff4d4d;
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script>
+        // 初始化 Supabase
+        const supabaseUrl = 'https://your-project.supabase.co';
+        const supabaseKey = 'your-public-anon-key';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        const daysElement = document.getElementById('days');
+        const monthYearElement = document.getElementById('monthYear');
+        const lotteryResultElement = document.getElementById('lotteryResult');
+        const randomCodeRecordsElement = document.getElementById('randomCodeRecords');
+        const ddxRecordsElement = document.getElementById('ddxRecords');
+        const today = new Date();
+        const currentMonth = today.getMonth();
+        const currentDate = today.getDate();
+        const currentYear = today.getFullYear();
+        let checkInDate = null; // 打卡日期
+        let generatedCode = ''; // 随机生成的4位数字校验码
+        let randomLotteryRecords = [];
+        let ddxLotteryRecords = [];
+        let cumulativeAmount = 0;
+
+        // 渲染日历
+        function renderCalendar() {
+            daysElement.innerHTML = '';
+            const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+            const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+            const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
+            weekDays.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day header';
+                dayElement.textContent = day;
+                daysElement.appendChild(dayElement);
+            });
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                daysElement.appendChild(emptyDay);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'day';
+                dayElement.textContent = day;
+                if (day === currentDate) {
+                    dayElement.onclick = () => checkIn(day);
+                }
+                if (isMarked(day)) {
+                    dayElement.innerHTML += '<div class="circle"></div>';
+                }
+                daysElement.appendChild(dayElement);
+            }
+            monthYearElement.textContent = `${currentYear}.${currentMonth + 1}`;
+        }
+
+        // 打卡功能
+        function checkIn(day) {
+            if (day === currentDate && !checkInDate) {
+                checkInDate = `${currentYear}.${currentMonth + 1}.${day}`;
+                generateCode();
+                alert(`打卡成功！您的校验码是：${generatedCode}`);
+                markCircle(day);
+                showSection('lotterySection');
+            } else {
+                alert('只能在今天打卡一次！');
+            }
+        }
+
+        function markCircle(day) {
+            saveLotteryRecord({ date: checkInDate, code: generatedCode }, 'marked_days');
+            renderCalendar();
+        }
+
+        function isMarked(day) {
+            // 在 Supabase 中检查是否有红圈标记
+            return false; // 示例代码，需使用查询来检查标记
+        }
+
+        // 抽奖功能
+        function drawLottery(code) {
+            if (code === generatedCode) {
+                const lotteryAmount = (Math.random() * 2).toFixed(2);
+                randomLotteryRecords.push({ date: checkInDate, time: new Date().toLocaleTimeString(), amount: lotteryAmount });
+                cumulativeAmount += parseFloat(lotteryAmount);
+                saveLotteryRecord({ date: checkInDate, time: new Date().toLocaleTimeString(), amount: lotteryAmount }, 'random_lottery_records');
+                alert(`抽奖成功！金额为：${lotteryAmount} 元`);
+            } else if (code === 'ddx') {
+                const lotteryAmount = (Math.random() * 2).toFixed(2);
+                ddxLotteryRecords.push({ date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString(), amount: lotteryAmount });
+                cumulativeAmount += parseFloat(lotteryAmount);
+                saveLotteryRecord({ date: new Date().toLocaleDateString(), time: new Date().toLocaleTimeString(), amount: lotteryAmount }, 'ddx_lottery_records');
+                alert(`ddx 抽奖成功！金额为：${lotteryAmount} 元`);
+            } else {
+                alert('无效校验码或校验码已使用！');
+            }
+        }
+
+        // 保存记录到 Supabase
+        async function saveLotteryRecord(record, tableName) {
+            const { data, error } = await supabase
+                .from(tableName)
+                .insert([record]);
+            if (error) {
+                console.error('保存记录时出错:', error);
+            } else {
+                console.log('记录已保存:', data);
+            }
+        }
+
+        // 读取记录
+        async function loadLotteryRecords(tableName) {
+            const { data, error } = await supabase
+                .from(tableName)
+                .select('*');
+            if (error) {
+                console.error('加载记录时出错:', error);
+            } else {
+                if (tableName === 'random_lottery_records') {
+                    randomLotteryRecords = data;
+                } else {
+                    ddxLotteryRecords = data;
+                }
+                updateRecords();
+            }
+        }
+
+        // 加载抽奖记录
+        loadLotteryRecords('random_lottery_records');
+        loadLotteryRecords('ddx_lottery_records');
+
+        function updateRecords() {
+            randomCodeRecordsElement.innerHTML = randomLotteryRecords.map(record => `<p>${record.date} ${record.time} - ${record.amount} 元</p>`).join('');
+            ddxRecordsElement.innerHTML = ddxLotteryRecords.map(record => `<p>${record.date} ${record.time} - ${record.amount} 元</p>`).join('');
+            lotteryResultElement.textContent = `累计金额：${cumulativeAmount} 元`;
+        }
+
+        // 重置校验码
+        async function resetAllCodes() {
+            const { error } = await supabase
+                .from('used_codes') // 假设有一个存储已使用校验码的表
+                .delete();
+            if (error) {
+                console.error('重置校验码时出错:', error);
+            } else {
+                alert('校验码重置成功！');
+            }
+        }
+
+        // 显示不同部分
+        function showSection(sectionId) {
+            document.querySelectorAll('.content').forEach(section => section.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+        }
+
+        // 渲染日历和加载记录
+        renderCalendar();
+        updateRecords();
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content active" id="calendarSection">
+            <h2 id="monthYear"></h2>
+            <div class="days" id="days"></div>
+        </div>
+
+        <div class="content" id="lotterySection">
+            <h2>抽奖页面</h2>
+            <input type="text" id="verificationCode" placeholder="输入校验码" />
+            <button class="button" onclick="drawLottery(document.getElementById('verificationCode').value)">抽奖</button>
+            <button class="button" id="resetButton" style="display:none;" onclick="resetAllCodes()">重置校验码</button>
+            <div id="lotteryResult"></div>
+            <div class="lottery-records">
+                <h3>随机校验码组</h3>
+                <div id="randomCodeRecords"></div>
+                <h3>ddx 组</h3>
+                <div id="ddxRecords"></div>
+            </div>
+            <button class="button" id="clearRecords" onclick="clearRecords()">清除所有记录</button>
+        </div>
+
+        <div class="bottom-nav">
+            <button class="button" onclick="showSection('calendarSection')">打卡</button>
+            <button class="button" onclick="showSection('lotterySection')">抽奖</button>
+        </div>
+    </div>
+</body>
+
+</html>

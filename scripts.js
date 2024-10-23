@@ -247,13 +247,16 @@ async function loadItems() {
     if (error) {
         console.error('Error:', error);
     } else {
-        const formattedData = data.map(item => {
-            return {
-                text: item.text,
-                created_at: item.created_at.substring(0, item.created_at.length - 3)
-                    .replace('T', ' ') // 将 T 替换为空格// 删除最后三个字符
-            };
-        });
+        // 过滤掉 text 为 null 的项
+        const formattedData = data
+            .filter(item => item.text !== null) // 过滤条件
+            .map(item => {
+                return {
+                    text: item.text,
+                    created_at: item.created_at.substring(0, item.created_at.length - 3)
+                        .replace('T', ' ') // 将 T 替换为空格
+                };
+            });
         displayItems(formattedData); // 传递格式化后的数据
     }
 }
@@ -327,9 +330,6 @@ function scrollToTop() {
     });
 }
 
-function appsclick() {
-
-}
 
 // OpenWeatherMap API key 
 window.onload = function () {
@@ -347,9 +347,20 @@ window.onload = function () {
 };
 
 function fetchWeather(lat, lon) {
-    const apiKey = '6699cc597cf7da347ed2c28ddfd0c177'; 
+    const apiKey = '6699cc597cf7da347ed2c28ddfd0c177';
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&lang=zh&units=metric`;
-
+    fetch(`https://restapi.amap.com/v3/geocode/regeo?key=351cd1781fb0924ac0478eb6390d3810&location=${lon},${lat}&radius=1000&extensions=all`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === "1") {
+                document.getElementById("address").textContent = data.regeocode.formatted_address
+            } else {
+                document.getElementById("location").innerHTML = `地址获取失败：${data.info}`;
+            }
+        })
+        .catch(error => {
+            document.getElementById("location").innerHTML = `请求失败：${error}`;
+        });
     fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
@@ -359,7 +370,7 @@ function fetchWeather(lat, lon) {
         })
         .then(data => {
             const weatherInfo = `
-                        <div class = "weatherinfo"><i class="fas fa-location icon"></i>地点:${data.name}- 中国</div>
+                        <div class = "weatherinfo"><i class="fas fa-location icon"></i>地点:${document.getElementById('address').textContent}</div>
                         <div class = "weatherinfo"><i class="fas fa-thermometer-half icon"></i> 温度: ${data.main.temp} °C</div>
                         <div class = "weatherinfo"><i class="fas fa-cloud icon"></i> 天气: ${data.weather[0].description}</div>
                         <div class = "weatherinfo"><i class="fas fa-wind icon"></i> 风速: ${data.wind.speed} m/s</div>
@@ -370,43 +381,80 @@ function fetchWeather(lat, lon) {
                         <div class = "weatherinfo"><i class="fas fa-tachometer-alt icon"></i> 气压: ${data.main.pressure} hPa</div>
                     `;
 
-            const suggestions = getSuggestions(data.main.temp, data.main.humidity);
+            const suggestions = getSuggestions(data.main.temp, data.main.humidity, data.weather[0].description, data.main.windSpeed);
             document.getElementById('weather-info').innerHTML = weatherInfo;
             document.getElementById('suggestions').innerHTML = suggestions;
             document.getElementById('error-message').textContent = '';
         })
         .catch(error => {
             showError(error.message);
-        });
+        })
+    document.getElementById('address').style.display = 'none';
 }
-
-function getSuggestions(temp, humidity) {
+function getSuggestions(temp, humidity, weather, windSpeed, windDirection) {
     let clothing = "建议穿轻薄的衣物。";
     let sunscreen = "建议使用防晒霜。";
-    let travel = "适合出行，享受户外活动。";
+    let exercise = "适合户外运动。";
+    let carWash = "适合洗车。";
+    let umbrella = "无需携带雨伞。";
+    let health = "当前天气不会影响健康。";
 
-    if (temp < 10) {
-        clothing = "建议穿保暖衣物。";
-    } else if (temp >= 10 && temp < 20) {
-        clothing = "建议穿外套。";
-    } else if (temp >= 20 && temp < 30) {
-        clothing = "建议穿短袖衣物。";
-    } else {
-        clothing = "建议穿凉快的衣物。";
+    // 确保 weather 参数有效
+    weather = weather || "";
+
+    // 穿衣建议
+    if (temp < 5) {
+        clothing = "建议穿厚实的保暖衣物，如羽绒服。";
+    } else if (temp >= 5 && temp < 15) {
+        clothing = "建议穿外套和长袖。";
+    } else if (temp >= 15 && temp < 25) {
+        clothing = "建议穿轻便的外套或长袖。";
+    } else if (temp >= 25) {
+        clothing = "建议穿短袖或凉快的衣物。";
     }
 
-    if (humidity > 80) {
-        travel = "可能会有降雨，请携带雨具。";
+    // 防晒建议
+    if (weather.includes("晴") || temp > 20) {
+        sunscreen = "建议使用高倍防晒霜，戴帽子、墨镜。";
+    } else if (weather.includes("阴") || weather.includes("雨")) {
+        sunscreen = "防晒需求较低。";
+    }
+
+    // 运动建议
+    if (temp < 0 || windSpeed > 15) {
+        exercise = "不适合户外运动，建议在室内运动。";
+    } else if (temp >= 0 && temp <= 30 && windSpeed <= 15) {
+        exercise = "适合户外运动，享受户外活动。";
+    }
+
+    // 洗车建议
+    if (weather.includes("雨") || humidity > 80) {
+        carWash = "不建议洗车，可能会有降雨或潮湿天气。";
+    } else {
+        carWash = "适合洗车，天气晴朗。";
+    }
+
+    // 带伞建议
+    if (weather.includes("雨") || humidity > 70) {
+        umbrella = "建议携带雨伞，以防天气变化。";
+    }
+
+    // 健康建议
+    if (temp < 5 || windSpeed > 20 || weather.includes("霾")) {
+        health = "天气寒冷或空气质量差，注意保暖和减少外出。";
     }
 
     return `
-                <h2>建议</h2>
-                <p>${clothing}</p>
-                <p>${sunscreen}</p>
-                <p>${travel}</p>
-            `;
+        <h2 style="position:relative; left:33%">建议</h2>
+        <br></br>
+        <p><b>穿衣建议:</b> ${clothing}</p>
+        <p><b>防晒建议:</b>${sunscreen}</p>
+        <p><b>运动建议:</b> ${exercise}</p>
+        <p><b>洗车建议:</b> ${carWash}</p>
+        <p><b>带伞建议:</b>${umbrella}</p>
+        <p><b>健康建议:</b> ${health}</p>
+    `;
 }
-
 function showError(message) {
     document.getElementById('error-message').textContent = message;
     document.getElementById('weather-info').innerHTML = '';
@@ -419,14 +467,18 @@ const close = document.getElementById('close');
 
 // 点击触发器放大并显示弹出窗口
 trigger.addEventListener('click', () => {
-    trigger.classList.add('scale-up'); // 添加放大动画
-    setTimeout(() => {
-        popup.classList.add('show'); // 延迟显示弹出窗口
-    }, 500); // 延迟时间与动画时间一致
+    popup.classList.add('show'); // 延迟显示弹出窗口
+
 });
 
 // 点击关闭按钮隐藏弹出窗口
 close.addEventListener('click', () => {
     popup.classList.remove('show');
-    trigger.classList.remove('scale-up'); // 移除放大效果
 });
+
+const lottery = document.getElementById('app2');
+const varify = document.getElementsByClassName('varify-container')[0]
+
+lottery.addEventListener('click', () => {
+    varify.style.display = 'flex';
+})

@@ -1,4 +1,3 @@
-
 // 引入supabase的连接配置 (确保替换为你的Supabase URL和Key)
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm'
 const supabaseUrl = 'https://trkbnxkkegwrhnboidwi.supabase.co'; // 替换为你的Supabase URL
@@ -9,12 +8,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 function generateRandomCode() {
     return Math.floor(1000 + Math.random() * 9000); // 生成一个四位随机数
 }
-
-const monthYearElement = document.getElementById('month-year');
-const daysElement = document.getElementById('days');
-const prevMonthButton = document.getElementById('prev-month');
-const nextMonthButton = document.getElementById('next-month');
-
 
 // 检查当天是否已经打卡
 async function hasPunchedIn(date) {
@@ -29,21 +22,6 @@ async function hasPunchedIn(date) {
     }
     return data.length > 0; // 如果今天已经打卡，返回true
 }
-//根据设备宽度设定font-size
-function refontsize() {
-    let fz = 0;
-    if (screen.width > screen.height) {
-        fz = screen.width
-    }
-    else {
-        fz = screen.height
-    }
-    document.documentElement.style.fontSize = fz / 20 + 'px';
-}
-
-refontsize();
-//改变屏幕尺寸时，触发reset
-window.onresize = refontsize()
 
 // 处理打卡并保存打卡信息（日期和随机验证码）
 async function punchIn(date) {
@@ -60,36 +38,35 @@ async function punchIn(date) {
 
     return true;
 }
-let currentDate = new Date();
 
+// 在渲染日历时，添加打卡逻辑
 function renderCalendar() {
     const month = currentDate.getMonth();
     const year = currentDate.getFullYear();
-    const today = new Date(); // 获取当前日期
-    const todayDate = today.getDate(); // 今天的日期
+    const today = new Date();
+    const todayDate = today.getDate();
 
-    // 更新月份和年份
     monthYearElement.textContent = `${year}年 ${month + 1}月`;
 
-    // 获取当前月份的第一天和最后一天
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
 
-    // 清空之前的日子
     daysElement.innerHTML = '';
 
-    // 填充空白
+    // 填充空白天数
     for (let i = 0; i < firstDay.getDay(); i++) {
         const emptyDiv = document.createElement('div');
         daysElement.appendChild(emptyDiv);
     }
 
-    // 填充每一天
+    // 填充实际日期并添加打卡功能
     for (let day = 1; day <= lastDay.getDate(); day++) {
         const dayDiv = document.createElement('div');
         dayDiv.textContent = day;
         daysElement.appendChild(dayDiv);
+
         const dateString = `${year}-${month + 1}-${day}`; // 日期格式为 "YYYY-MM-DD"
+
         // 检查这一天是否已经打卡
         hasPunchedIn(dateString).then((punchedIn) => {
             if (punchedIn) {
@@ -111,36 +88,13 @@ function renderCalendar() {
                 }
             }
         });
-        // 检查是否是今天
-        if (
-            day === todayDate &&
-            month === today.getMonth() &&
-            year === today.getFullYear()
-        ) {
-            dayDiv.classList.add('today'); // 添加今天的类
+
+        // 高亮显示今天的日期
+        if (day === todayDate && month === today.getMonth() && year === today.getFullYear()) {
+            dayDiv.classList.add('today');
         }
     }
 }
-
-// 切换到上一个月
-prevMonthButton.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar();
-});
-
-// 切换到下一个月
-nextMonthButton.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar();
-});
-
-const jumpToTodayButton = document.getElementById('jump-to-today');
-
-jumpToTodayButton.addEventListener('click', () => {
-    currentDate = new Date(); // 更新当前日期为今天
-    renderCalendar(); // 重新渲染日历
-});
-
 
 // 加载页面时查询已打卡日期并标记
 async function loadPunchedInDates() {
@@ -160,5 +114,6 @@ async function loadPunchedInDates() {
     });
 }
 
-// 初始化日历
+// 页面加载时渲染日历和加载已打卡日期
 renderCalendar();
+loadPunchedInDates();

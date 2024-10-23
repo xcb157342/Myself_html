@@ -1,0 +1,178 @@
+.lottery {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #02000086;
+    overflow: hidden;
+    z-index: 5;
+    backdrop-filter: blur(0.2rem);
+}
+
+.lo-container {
+    background-color: rgba(200, 186, 186, 0.411);
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+
+.lo-container .lo-card {
+    position: absolute;
+    width: 2.5rem;
+    height: 4rem;
+    background-color: #5e5cfc;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0);
+    font-size: 1.5rem;
+    font-weight: 800;
+    border: 0.1rem solid rgba(0, 0, 0, .1);
+    transform-origin: 50% 100%;
+    transition: .5s;
+    filter: hue-rotate(calc(var(--i)*60deg));
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+}
+
+.lo-container:hover .lo-card {
+    transform: rotate(calc(var(--i)*5deg)) translate(calc(var(--i)*1.5rem), -0.8rem);
+    color: rgba(0, 0, 0, .5);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+}
+
+.lo-container .lo-card:hover {
+    translate: calc(var(--i)*0.2rem) -0.5rem;
+}
+
+.cardactive {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* 中心对齐 */
+    background-color: rgb(210, 217, 198);
+    color: black;
+    z-index: 10;
+    /* 提升到最上层 */
+}
+
+.lo-container .lo-card.cardhidden {
+    display: none;
+}
+
+.selected-card {
+    position: absolute;
+    width: 2.5rem;
+    height: 4rem;
+    background-color: #5e5cfc;
+    border-radius: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.541);
+    font-size: 1rem;
+    font-weight: 800;
+    border: 0.1rem solid rgba(0, 0, 0, .1);
+    transform-origin: 50% 100%;
+    transition: .5s;
+    filter: hue-rotate(calc(var(--i)*60deg));
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.192);
+    cursor: pointer;
+}
+
+#resetButton {
+    position: absolute;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    right: 20px;
+    bottom: 50px;
+}
+
+.varify-container {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: #02000086;
+    overflow: hidden;
+    z-index: 5;
+    backdrop-filter: blur(0.2rem);
+    z-index: 10;
+}
+
+.varify {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(96, 255, 255, 0.596);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.3rem;
+    backdrop-filter: blur(0.1rem);
+    box-shadow: 0 0 0.1rem #333;
+}
+
+.varify input {
+    height: 0.5rem;
+    border-radius: 0.2rem;
+    font-size: 0.2rem;
+    width: 2rem;
+    border-style: none;
+    transition: 0.5s;
+}
+
+.varify input:hover {
+    border-style: solid;
+    box-shadow: 0 0 0.1rem #333;
+}
+
+#varifybutton {
+    height: 0.5rem;
+    width: 0.7rem;
+    margin-left: 0.2rem;
+    border-radius: 0.2rem;
+    border-style: none;
+    font-size: 0.2rem;
+}
+
+#varifybutton:hover {
+    border-style: solid;
+    box-shadow: 0 0 0.1rem #333;
+}
+
+.varify h1 {
+    position: absolute;
+    top: 0.5rem;
+}
+
+.errortext {
+    color: rgb(255, 0, 0);
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0.8rem;
+    font-size: 0.17rem;
+    font-style: italic;
+}
+
+#varify-close {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.2rem;
+    border-radius: 50%;
+    border-style: none;
+
+}

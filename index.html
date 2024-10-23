@@ -9,13 +9,14 @@
     <title>谢诚斌</title>
 
     <!-- 引入外部字体图标库 -->
-    <link rel="stylesheet" href="https:////at.alicdn.com/t/c/font_4716565_peulb77650p.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4716565_bm3bllygabk.css">
     <link rel="stylesheet" href="styles.css?v=1.0.3.1">
     <link rel="stylesheet" href="notepage.css">
     <link rel="stylesheet" href="shell.css">
     <link rel="stylesheet" href="calendarpage.css">
     <link rel="stylesheet" href="appspage.css">
     <link rel="stylesheet" href="weather.css">
+    <link rel="stylesheet" href="lottery.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
@@ -70,7 +71,7 @@
 
     <div class="content" id="appspage">
         <div class="appi" id="app1">天气</div>
-        <div class="appi" id="app2">app2</div>
+        <div class="appi" id="app2">抽奖</div>
         <div class="appi" id="app3">app3</div>
         <div class="appi" id="app4">app4</div>
     </div>
@@ -78,10 +79,44 @@
         <h1><b>天气查询</b></h1>
         <div class="weather-container">
             <div class="weather-info" id="weather-info"></div>
+            <div id="address"></div>
         </div>
         <div class="suggestions" id="suggestions"></div>
         <div class="error" id="error-message"></div>
-        <span class="close" id="close">X</span>
+        <button class="close" id="close">X</button>
+    </div>
+    <div class="lottery">
+        <div class="lo-container">
+            <div class="lo-card" style="--i:-4;">1</div>
+            <div class="lo-card" style="--i:-3;">2</div>
+            <div class="lo-card" style="--i:-2;">3</div>
+            <div class="lo-card" style="--i:-1;">4</div>
+            <div class="lo-card" style="--i:0;">5</div>
+            <div class="lo-card" style="--i:1;">6</div>
+            <div class="lo-card" style="--i:2;">7</div>
+            <div class="lo-card" style="--i:3;">8</div>
+            <div class="lo-card" style="--i:4;">9</div>
+        </div>
+        <button id="resetButton" onclick="resetButton()">
+            <div class="reset-icon" style="scale:3;">
+                <i class="iconfont icon-close" style="scale: 1.5;"></i>
+            </div>
+        </button>
+    </div>
+    <div class="varify-container">
+        <div class='varify'>
+            <h1>抽奖验证</h1>
+            <!-- 验证码输入框 -->
+            <input type="text" id="codeInput" placeholder="  请输入验证码">
+            <button onclick="verifyCode()" id="varifybutton">验证</button>
+            <div class="errortext"></div>
+            <button id="varify-close" style="background-color: rgba(0,0,0,0); cursor: pointer;" onclick="closevarify()">
+                <div class=" varify-close-button"
+                    style="scale: 0.8; color: red;box-shadow: 0 0.2rem 2rem rgba(0,0,0,0.5);">
+                    <i class="iconfont icon-close"></i>
+                </div>
+            </button>
+        </div>
     </div>
 
     <div class="content" id="linkspage">
@@ -176,6 +211,7 @@
         </ul>
     </div>
     <script type="module" src="scripts.js?v=1.0.1"></script>
+    <script type="module" src="lottery.js"></script>
 </body>
 
 </html>

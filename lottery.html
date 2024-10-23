@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4716565_ln0phq5wyx.css">
+    <title>lottery</title>
+    <style>
+        .lottery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #02000086;
+            overflow: hidden;
+        }
+
+        .lo-container {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lo-container .lo-card {
+            position: absolute;
+            width: 240px;
+            height: 360px;
+            background-color: #5e5cfc;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(0, 0, 0, 0);
+            font-size: 8em;
+            font-weight: 800;
+            border: 10px solid rgba(0, 0, 0, .1);
+            transform-origin: 50% 100%;
+            transition: .5s;
+            filter: hue-rotate(calc(var(--i)*60deg));
+            box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+            cursor: pointer;
+        }
+
+        .lo-container:hover .lo-card {
+            transform: rotate(calc(var(--i)*5deg)) translate(calc(var(--i)*120px), -50px);
+            color: rgba(0, 0, 0, .5);
+            box-shadow: 0 10px 10px rgba(0, 0, 0, .25);
+        }
+
+        .lo-container .lo-card:hover {
+            translate: calc(var(--i)*20px) -50px;
+        }
+
+        .active {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            /* 中心对齐 */
+            background-color: rgb(210, 217, 198);
+            color: black;
+            z-index: 10;
+            /* 提升到最上层 */
+        }
+
+        .lo-container .lo-card.hidden {
+            display: none;
+        }
+
+        .selected-card {
+            position: absolute;
+            width: 240px;
+            height: 360px;
+            background-color: #5e5cfc;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 8em;
+            font-weight: 800;
+            border: 10px solid rgba(0, 0, 0, .1);
+            transform-origin: 50% 100%;
+            transition: .5s;
+            filter: hue-rotate(calc(var(--i)*60deg));
+            box-shadow: 0 10px 10px rgba(0, 0, 0, .1);
+            cursor: pointer;
+        }
+
+        #resetButton {
+            position: absolute;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            right: 20px;
+            bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lottery">
+        <div class="lo-container">
+            <div class="lo-card" style="--i:-4;">1</div>
+            <div class="lo-card" style="--i:-3;">2</div>
+            <div class="lo-card" style="--i:-2;">3</div>
+            <div class="lo-card" style="--i:-1;">4</div>
+            <div class="lo-card" style="--i:0;">5</div>
+            <div class="lo-card" style="--i:1;">6</div>
+            <div class="lo-card" style="--i:2;">7</div>
+            <div class="lo-card" style="--i:3;">8</div>
+            <div class="lo-card" style="--i:4;">9</div>
+        </div>
+        <!-- <button id="resetButton" onclick="resetButton()">
+            <div class="reset-icon" style="scale:3;">
+                <i class="iconfont icon-reload" style="scale: 1.5;"></i>
+            </div>
+        </button> -->
+    </div>
+    <script>
+        const cards = document.querySelectorAll('.lo-card');
+
+        cards.forEach(function (card) {
+            card.addEventListener('click', function () {
+                // 获取点击的卡片索引
+                const clickedIndex = Array.from(cards).indexOf(card);
+
+                // 固定其他卡片的位置
+                cards.forEach((c, index) => {
+                    if (index !== clickedIndex) {
+                        const rect = c.getBoundingClientRect();
+                        c.classList.add('cardhidden'); // 添加隐藏
+                    }
+                });
+
+                // 将被点击的卡片移动到屏幕中心并翻转
+                card.textContent = Math.floor(Math.random() * 100) + 1; // 生成随机数
+                card.classList.remove('lo-card')
+                card.classList.add('selected-card')
+                card.classList.add('cardactive'); // 使其成为活动卡片
+            });
+        });
+        function resetButton() {
+            var cards = document.querySelectorAll('.lo-card')
+            var selectedCard = document.getElementsByClassName('selected-card')[0]
+            cards.forEach(function (card) {
+                card.classList.remove('cardhidden')
+            })
+            if (selectedCard) {
+                selectedCard.classList.add('lo-card')
+                selectedCard.classList.remove('selected-card')
+                selectedCard.classList.remove('cardactive')
+            }
+        }
+    </script>
+</body>
+
+</html>
